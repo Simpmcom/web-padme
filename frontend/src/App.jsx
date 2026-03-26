@@ -9,6 +9,7 @@ import Services from './components/sections/Services';
 import Products from './components/sections/Products';
 import Contact from './components/sections/Contact';
 import TaxInfo from './components/sections/TaxInfo';
+import Chatbot from './components/Chatbot';
 
 function App() {
   useEffect(() => {
@@ -45,6 +46,7 @@ function App() {
         <TaxInfo />
       </main>
       <Footer />
+      <Chatbot />
     </>
   );
 }
