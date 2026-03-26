@@ -1,420 +1,50 @@
 import React, { useEffect } from 'react';
 import './index.css';
 
+import Header from './components/layout/Header';
+import Footer from './components/layout/Footer';
+import Hero from './components/sections/Hero';
+import About from './components/sections/About';
+import Services from './components/sections/Services';
+import Products from './components/sections/Products';
+import Contact from './components/sections/Contact';
+import TaxInfo from './components/sections/TaxInfo';
+
 function App() {
   useEffect(() => {
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
+    // Delay slightly to ensure React elements are rendered before observing
+    setTimeout(() => {
+      const observerOptions = {
+          threshold: 0.1,
+          rootMargin: '0px 0px -50px 0px'
+      };
 
-    const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-            }
-        });
-    }, observerOptions);
+      const revealObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                  entry.target.classList.add('active');
+              }
+          });
+      }, observerOptions);
 
-    document.querySelectorAll('.reveal').forEach(el => {
-        revealObserver.observe(el);
-    });
-    
-    return () => revealObserver.disconnect();
+      document.querySelectorAll('.reveal').forEach(el => {
+          revealObserver.observe(el);
+      });
+    }, 100);
   }, []);
 
   return (
     <>
-      {/* TopNavBar */}
-<nav className="fixed top-0 w-full z-50 bg-slate-900/40 backdrop-blur-xl border-b border-white/5">
-<div className="flex justify-between items-center max-w-7xl mx-auto px-8 h-20">
-<div className="text-2xl font-black tracking-tighter text-white uppercase font-['Space_Grotesk']">
-            PADME
-        </div>
-<div className="hidden md:flex items-center gap-8 font-['Space_Grotesk'] font-bold tracking-tight">
-<a className="text-orange-500 border-b-2 border-orange-500 pb-1" href="#">Trang chủ</a>
-<a className="text-slate-300 hover:text-white transition-colors" href="#about">Về chúng tôi</a>
-<a className="text-slate-300 hover:text-white transition-colors" href="#services">Dịch vụ</a>
-<a className="text-slate-300 hover:text-white transition-colors" href="#products">Sản phẩm</a>
-<a className="text-slate-300 hover:text-white transition-colors" href="#contact">Liên hệ</a>
-</div>
-<button className="bg-primary-container text-on-primary-container px-6 py-2.5 rounded-full font-bold scale-95 active:scale-90 transition-all duration-300 hover:shadow-[0_0_20px_rgba(242,141,33,0.5)]">
-            Khám phá giải pháp
-        </button>
-</div>
-</nav>
-<main>
-{/* Hero Section */}
-<section className="relative min-h-screen flex items-center overflow-hidden">
-{/* Full-Width Background Image */}
-<div className="absolute inset-0 z-0">
-<img alt="AI brain and neural network background" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzBikvf-qmMrYtdvImJgooP150We4uUDRixSZJkPzBBKfO1uBhGv7prqWfiJD9HjzTqAwCpwcXO5aPUEvsuYZVi4Jb4UZAMguKs6J4PK-0B4l2ahohOyCBfXMaovDwiiukBnvhe1okWw2I4IWZINHG6z5EGE2x8dNGmBRXWqC9EFOFhzzc4Jq1Pl3FMHB1aCURiRKq6z-ykIKthQ8j05sCsb8OKotHSmhbTmBxSPAdb8HqNrMKVn_GOC84A9QyQ1LUjqHSujwcWv-0"/>
-<div className="absolute inset-0 bg-gradient-to-r from-background via-background/40 to-transparent"></div>
-<div className="absolute inset-0 bg-black/20"></div>
-</div>
-<div className="max-w-7xl mx-auto w-full px-8 relative z-10">
-<div className="max-w-3xl glass-card-light p-10 md:p-16 rounded-[2rem] border-white/5">
-<h1 className="text-5xl md:text-7xl font-bold leading-[1.1] mb-6 tracking-tight text-white">
-                    PADME+<br/>
-<span className="text-primary text-glow">Giải pháp đúng, Cuộc sống khác</span>
-</h1>
-<p className="text-xl text-on-surface-variant mb-10 max-w-xl font-light leading-relaxed">
-                    Kiến tạo tương lai số bằng sức mạnh của AI, eSIM toàn cầu và hệ thống Marketing tự động hóa. Chúng tôi đồng hành cùng doanh nghiệp bứt phá mọi giới hạn.
-                </p>
-<div className="flex flex-wrap gap-4">
-<button className="bg-gradient-to-br from-primary to-primary-container text-on-primary px-8 py-4 rounded-xl font-bold text-lg glow-primary hover:scale-105 transition-transform duration-300">
-                        Khám phá giải pháp
-                    </button>
-<button className="bg-surface-variant/30 backdrop-blur-xl border border-outline-variant/10 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-surface-variant/50 transition-all">
-                        Liên hệ hợp tác
-                    </button>
-</div>
-</div>
-</div>
-</section>
-{/* About Us Section */}
-<section className="py-32 bg-surface-container-low" id="about">
-<div className="max-w-7xl mx-auto px-8">
-<div className="text-center mb-20 reveal reveal-up">
-<h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Công nghệ vị nhân sinh</h2>
-<p className="text-on-surface-variant max-w-2xl mx-auto text-lg">
-                    Tại PADME, chúng tôi tin rằng công nghệ chỉ có giá trị khi phục vụ con người. Chúng tôi cam kết dành <span className="text-primary font-bold">10% lợi nhuận</span> hàng năm cho các hoạt động thiện nguyện.
-                </p>
-</div>
-<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-{/* Integrity Card */}
-<div className="glass-card p-8 rounded-2xl hover:bg-surface-container-high transition-all duration-300 group reveal reveal-up stagger-1">
-<div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-<span className="material-symbols-outlined text-primary text-3xl" data-icon="verified_user">verified_user</span>
-</div>
-<h3 className="text-xl font-bold text-white mb-3">Integrity</h3>
-<p className="text-on-surface-variant text-sm leading-relaxed">Chính trực trong mọi giao dịch và giải pháp, đặt niềm tin của khách hàng lên hàng đầu.</p>
-</div>
-{/* Efficiency Card */}
-<div className="glass-card p-8 rounded-2xl hover:bg-surface-container-high transition-all duration-300 group reveal reveal-up stagger-2">
-<div className="w-14 h-14 rounded-xl bg-tertiary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-<span className="material-symbols-outlined text-tertiary text-3xl" data-icon="bolt">bolt</span>
-</div>
-<h3 className="text-xl font-bold text-white mb-3">Efficiency</h3>
-<p className="text-on-surface-variant text-sm leading-relaxed">Tối ưu hóa quy trình thông qua AI để mang lại hiệu quả vượt trội cho doanh nghiệp.</p>
-</div>
-{/* Humanity Card */}
-<div className="glass-card p-8 rounded-2xl hover:bg-surface-container-high transition-all duration-300 group reveal reveal-up stagger-3">
-<div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-<span className="material-symbols-outlined text-primary text-3xl" data-icon="favorite">favorite</span>
-</div>
-<h3 className="text-xl font-bold text-white mb-3">Humanity</h3>
-<p className="text-on-surface-variant text-sm leading-relaxed">Công nghệ được thiết kế để giải quyết các vấn đề thực tế của con người.</p>
-</div>
-{/* Giving Card */}
-<div className="glass-card p-8 rounded-2xl hover:bg-surface-container-high transition-all duration-300 group reveal reveal-up stagger-4">
-<div className="w-14 h-14 rounded-xl bg-tertiary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-<span className="material-symbols-outlined text-tertiary text-3xl" data-icon="volunteer_activism">volunteer_activism</span>
-</div>
-<h3 className="text-xl font-bold text-white mb-3">Giving</h3>
-<p className="text-on-surface-variant text-sm leading-relaxed">Lan tỏa yêu thương và chia sẻ giá trị thặng dư với cộng đồng yếu thế.</p>
-</div>
-</div>
-</div>
-</section>
-{/* Services Section */}
-<section className="py-32" id="services">
-<div className="max-w-7xl mx-auto px-8">
-<div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8 reveal reveal-up">
-<div className="max-w-xl">
-<h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Dịch vụ và Giải pháp</h2>
-<p className="text-on-surface-variant text-lg">Chúng tôi cung cấp hệ sinh thái giải pháp số toàn diện, giúp doanh nghiệp chuyển đổi và tăng trưởng bền vững.</p>
-</div>
-<div className="h-px flex-grow bg-outline-variant/20 mx-8 hidden md:block mb-6"></div>
-</div>
-<div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-{/* Card 1 */}
-<div className="glass-card rounded-3xl overflow-hidden hover:shadow-[0_20px_60px_rgba(0,13,42,0.6)] transition-all duration-500 reveal reveal-up stagger-1">
-<div className="h-64 overflow-hidden relative">
-<img alt="Software Development" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYX9fvUN7oPTiC0HUZqyDrHfjmbL6hoDR1Ido7pJaBg-zdMBcaXdq7o9njnM9S2RUJrE3g1y_D8XS3ox1RsDZ1d74SLwPWb6czsip_KlBWt7n1DbcB8tzSRxXKBgTGH8irKVzdMv2P2g4Qn1X2skmCDT5-iP9RWUPgFcPmX35a-rLOK3nFpdRbY6BfitEPPXa_hajRc6sKgitmWOtLFm0VFjul6z--rMIPhK0t_OgZruMXrlL4xHsI983vELKhIaaDoWRn0E02US4l"/>
-<div className="absolute inset-0 bg-gradient-to-t from-surface-variant/80 to-transparent"></div>
-</div>
-<div className="p-8">
-<h3 className="text-2xl font-bold text-white mb-4">Software Development</h3>
-<ul className="space-y-3 mb-8">
-<li className="flex items-center gap-3 text-on-surface-variant">
-<span className="material-symbols-outlined text-primary text-sm" data-icon="check_circle">check_circle</span>
-                                Hệ thống CRM / ERP tùy chỉnh
-                            </li>
-<li className="flex items-center gap-3 text-on-surface-variant">
-<span className="material-symbols-outlined text-primary text-sm" data-icon="check_circle">check_circle</span>
-                                AI Agents cho doanh nghiệp
-                            </li>
-<li className="flex items-center gap-3 text-on-surface-variant">
-<span className="material-symbols-outlined text-primary text-sm" data-icon="check_circle">check_circle</span>
-                                Ứng dụng di động tối ưu
-                            </li>
-</ul>
-<button className="text-primary font-bold flex items-center gap-2 group">
-                            Tìm hiểu thêm 
-                            <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
-</button>
-</div>
-</div>
-{/* Card 2 */}
-<div className="glass-card rounded-3xl overflow-hidden hover:shadow-[0_20px_60px_rgba(0,13,42,0.6)] transition-all duration-500 border-primary/20 reveal reveal-up stagger-2">
-<div className="h-64 overflow-hidden relative">
-<img alt="Digital Marketing" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwOHinkkGIMlagz1xVivx2IrPUw0GW0XQNcjfvTdrBwXKdtjXyErTNGcrm5oY1jt9bwkzK9F_k5hP3rd9s6rZMRAodrrZi-HEOhetiX8ThiPw00HtJPJGBMtvLn0_nEwCmD3WxgAp2hdWMDpOVy1M2Mnvs3c1U9Sx1ZeGpFh5OM8jq5iMI8l5a-eDbF8Qg2QDo4B8T6Qjg-1W15FbUhw3i2PJ-o8ze-h51uiIchuASQ42DLL3TNz2Via6ZDy4XpPE68l6rTNa1Dnbu"/>
-<div className="absolute inset-0 bg-gradient-to-t from-surface-variant/80 to-transparent"></div>
-</div>
-<div className="p-8">
-<h3 className="text-2xl font-bold text-white mb-4">Digital Marketing</h3>
-<ul className="space-y-3 mb-8">
-<li className="flex items-center gap-3 text-on-surface-variant">
-<span className="material-symbols-outlined text-primary text-sm" data-icon="check_circle">check_circle</span>
-                                Chiến lược tăng trưởng đột phá
-                            </li>
-<li className="flex items-center gap-3 text-on-surface-variant">
-<span className="material-symbols-outlined text-primary text-sm" data-icon="check_circle">check_circle</span>
-                                Marketing Automation chuyên sâu
-                            </li>
-<li className="flex items-center gap-3 text-on-surface-variant">
-<span className="material-symbols-outlined text-primary text-sm" data-icon="check_circle">check_circle</span>
-                                Data-driven Advertising
-                            </li>
-</ul>
-<button className="text-primary font-bold flex items-center gap-2 group">
-                            Tìm hiểu thêm 
-                            <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
-</button>
-</div>
-</div>
-{/* Card 3 */}
-<div className="glass-card rounded-3xl overflow-hidden hover:shadow-[0_20px_60px_rgba(0,13,42,0.6)] transition-all duration-500 reveal reveal-up stagger-3">
-<div className="h-64 overflow-hidden relative">
-<img alt="Travel eSIM" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9zVrgwN9XE0pydlgSvajk1qAz6h99_bQSRXwzYiUmdwr12cNb6eF2MQMxRnZuy8NSLvuFu6-r-rgQ5fjjKZJrN9E8BV89suEqVumVCGbcKGdnTiOfIdBuyt6Ybd4gF_gpuF8doBq1hjK-7fGSFbCKTLN02GTZRlxffFgsgWUneH3QfK6MliWnvWGV6GU8aYv9ADuT8gL3-OT37Dar6W-RjN3x-UjSoegPGGePTExxtWHCmnGcj2pyWaWH9QC2n5h8uwnh48iEO3yv"/>
-<div className="absolute inset-0 bg-gradient-to-t from-surface-variant/80 to-transparent"></div>
-</div>
-<div className="p-8">
-<h3 className="text-2xl font-bold text-white mb-4">Travel eSIM (simpm.vn)</h3>
-<ul className="space-y-3 mb-8">
-<li className="flex items-center gap-3 text-on-surface-variant">
-<span className="material-symbols-outlined text-primary text-sm" data-icon="check_circle">check_circle</span>
-                                Phủ sóng hơn 200+ quốc gia
-                            </li>
-<li className="flex items-center gap-3 text-on-surface-variant">
-<span className="material-symbols-outlined text-primary text-sm" data-icon="check_circle">check_circle</span>
-                                Kết nối tức thì, không cần sim vật lý
-                            </li>
-<li className="flex items-center gap-3 text-on-surface-variant">
-<span className="material-symbols-outlined text-primary text-sm" data-icon="check_circle">check_circle</span>
-                                Quản lý linh hoạt qua ứng dụng
-                            </li>
-</ul>
-<button className="text-primary font-bold flex items-center gap-2 group">
-                            Ghé thăm simpm.vn
-                            <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
-</button>
-</div>
-</div>
-</div>
-</div>
-</section>
-{/* Featured Products Section */}
-<section className="py-24 px-8 max-w-7xl mx-auto" id="products">
-<div className="mb-20 space-y-4 reveal reveal-up">
-<div className="flex items-center gap-4">
-<div className="h-px w-12 bg-primary"></div>
-<span className="text-primary font-bold tracking-widest uppercase text-sm">Our Portfolio</span>
-</div>
-<h2 className="text-5xl md:text-6xl font-bold text-white tracking-tighter">
-                Sản phẩm <span className="text-primary text-glow">nổi bật</span>
-</h2>
-<p className="text-on-surface-variant max-w-2xl text-lg leading-relaxed">
-                Khám phá những giải pháp công nghệ tiên phong, nơi AI và dữ liệu hội tụ để kiến tạo giá trị thực cho doanh nghiệp.
-            </p>
-</div>
-{/* Bento-style Grid */}
-<div className="grid grid-cols-1 md:grid-cols-12 gap-8">
-{/* Project 1: simpm.vn */}
-<div className="md:col-span-8 group relative overflow-hidden rounded-xl bg-surface-container-low border border-outline-variant/10 hover:border-primary/30 transition-all duration-500 reveal reveal-up stagger-1">
-<div className="aspect-[16/9] w-full overflow-hidden">
-<img alt="simpm.vn Platform" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtA-xdfRrRnK1O-C4aOFGtiYHn56u004_11rU1jwsu1u46nLjL8qtU1PmLGzzwvoUpAz46gOqItuyl_JvGY7Hsqw6vxXR0gPxzmbFXWX0ruLbf-UMO3UQbu7r3AyWDaVq0tWBp4ufTGNsOrFjq95RiobkDd8Bub63Wb74jJwtMkHBHTmBdfJ9x-wLOKBNAJvMyrzngmLxh4TgiLVgQcNA1-bldAGD4KtfcNzrqtkYQaOR0NTJoskhy_ZvdCvLro3-IpO3tBULCC080"/>
-</div>
-<div className="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-surface-container-lowest/40 to-transparent p-8 flex flex-col justify-end">
-<div className="flex items-center gap-3 mb-4">
-<span className="bg-primary/20 text-primary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Telecom Tech</span>
-</div>
-<h3 className="text-3xl font-bold text-white mb-3">simpm.vn</h3>
-<p className="text-on-surface-variant max-w-xl text-sm md:text-base leading-relaxed mb-6">
-                        Nền tảng cung cấp eSIM du lịch toàn cầu tối ưu, tích hợp hệ thống thanh toán đa phương thức (VNPAY, MoMo, ZaloPay) với tốc độ xử lý giao dịch dưới 2 giây. Hỗ trợ hơn 200 quốc gia và vùng lãnh thổ.
-                    </p>
-<div className="flex gap-4">
-<button className="flex items-center gap-2 text-white font-bold hover:text-primary transition-colors group/link">
-                            Xem chi tiết 
-                            <span className="material-symbols-outlined text-sm group-hover/link:translate-x-1 transition-transform">arrow_forward</span>
-</button>
-</div>
-</div>
-</div>
-{/* Project 2: AI Dashboard */}
-<div className="md:col-span-4 group relative overflow-hidden rounded-xl bg-surface-container-low border border-outline-variant/10 hover:border-primary/30 transition-all duration-500 reveal reveal-up stagger-2">
-<div className="aspect-[4/5] w-full overflow-hidden">
-<img alt="AI Enterprise Dashboard" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARSUVmSyKFnTtFWyh_S5UU2InCY4euJBy_xmwETRp-kPo_3J6Xsc-yAv9nUFthswfYPHw8nvcy4ZE3alfppkT55DHOJ9KYp9vCSp2XIddOR-vp3D8PoyfXubrzWbHJQYuk2NpuslmxKvsofpuraMaTSO6-Z83TjyBIg8K-7JkpZY4OS16K6y0SkMbx0pewYR1VugMPYNZPFh4NI05gBJKCwnsHOQY0J3YOHvslx6oYAAOT2KJwuSsPoQIV_e_J3nBtvdlU24AlSulD"/>
-</div>
-<div className="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-surface-container-lowest/20 to-transparent p-8 flex flex-col justify-end">
-<span className="bg-tertiary/20 text-tertiary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider w-fit mb-4">AI Business</span>
-<h3 className="text-2xl font-bold text-white mb-3">AI Dashboard</h3>
-<p className="text-on-surface-variant text-sm leading-relaxed mb-4">
-                        Hệ thống quản trị doanh nghiệp ứng dụng AI để phân tích dữ liệu kinh doanh theo thời gian thực, dự báo xu hướng thị trường.
-                    </p>
-</div>
-</div>
-{/* Project 3: Marketing Report */}
-<div className="md:col-span-12 group relative overflow-hidden rounded-xl bg-surface-container-low border border-outline-variant/10 hover:border-primary/30 transition-all duration-500 flex flex-col md:flex-row reveal reveal-up stagger-3">
-<div className="md:w-1/2 overflow-hidden">
-<img alt="Marketing Automation" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADbTxzFumN4jx9Fh9e7yVGsB8iYe_ggSMw_3NlbDnQNAS0W6dDNVyFLXipdITC70F5iRRHHtTt4JsZjAtZqStp_qfwg-GMioWIsEkbqb-4cd7cADO0BuxPTvnL4RqHPFQuE73A7wlipNLI93MROBvvoNcy_hl-DstRN4Aev_z8G1qmYAgzHJhTwEWOMHJQ3VlZZDB2o5PYtr_R7zcJhgLbuTifLViPxl1IsnbOvIWKQKrqIBqAsVOW_NbQ-ZBFu1zNOpYqIgz2Nac1"/>
-</div>
-<div className="md:w-1/2 p-12 flex flex-col justify-center bg-surface-container-high">
-<span className="bg-primary/20 text-primary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider w-fit mb-6">Automation</span>
-<h3 className="text-4xl font-bold text-white mb-6">Marketing Report</h3>
-<p className="text-on-surface-variant text-lg leading-relaxed mb-8">
-                        Công cụ tự động hóa báo cáo đa kênh, tích hợp AI để đánh giá hiệu quả chiến dịch và đề xuất giải pháp tối ưu hóa chi phí quảng cáo tự động. Giúp doanh nghiệp tiết kiệm 40% thời gian tổng hợp dữ liệu.
-                    </p>
-<div className="flex items-center gap-8">
-<div className="flex flex-col">
-<span className="text-3xl font-bold text-primary">98%</span>
-<span className="text-xs text-on-surface-variant uppercase tracking-widest">Accuracy</span>
-</div>
-<div className="h-10 w-px bg-outline-variant/20"></div>
-<div className="flex flex-col">
-<span className="text-3xl font-bold text-primary">40%</span>
-<span className="text-xs text-on-surface-variant uppercase tracking-widest">Efficiency</span>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-{/* Asymmetric Feature Highlight Section (Redesigned Contact) */}
-<section className="relative py-32 overflow-hidden" id="contact">
-{/* Background Decoration */}
-<div className="absolute top-1/2 left-0 -translate-y-1/2 w-96 h-96 bg-primary/10 blur-[120px] rounded-full pointer-events-none"></div>
-<div className="max-w-7xl mx-auto px-8 flex flex-col lg:flex-row items-center gap-16 lg:gap-24 relative">
-{/* Visual Side */}
-<div className="w-full lg:w-1/2 relative group reveal reveal-left">
-<div className="absolute -inset-4 bg-primary/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-<div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-surface-container-lowest border border-outline-variant/10">
-<img alt="AI Core Evolution" className="w-full aspect-square object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZalmRliaPnx8zZDqzMCPs0b5TAYtnnOHJrHk3MCKHDjZS6WCEQKNw_PwUwHg2kuKw2Kzc8Arm2rwF8KTT5FsM5fdADg3T_3-EO-rCBxlOXFlWJb2f57o2l9OKBbD4qq2UU8Td7gnWwGdA6gOG34dyhHV0oAvVZ4EWKhlHxXtpn7BIGfd7f9kyUW6_UE-xinUb5RF83XBuz4UE90RDXwPMxt5E6LCfm1pJbbvylSUFzic6oaxnMfZXFVGVyvf8kagsKlrfEUV1irsS"/>
-{/* Neural Link Overlay elements */}
-<div className="absolute top-12 right-12 glass-card p-4 rounded-xl border border-white/10">
-<span className="material-symbols-outlined text-primary text-3xl mb-2">neurology</span>
-<p className="text-xs font-bold text-white uppercase tracking-tighter">Processing Core</p>
-</div>
-<div className="absolute bottom-12 left-12 glass-card p-4 rounded-xl border border-white/10">
-<div className="flex items-center gap-2 mb-1">
-<div className="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
-<span className="text-[10px] text-primary font-bold uppercase">System Active</span>
-</div>
-<p className="text-lg font-bold text-white tracking-tight">AI Optimizing...</p>
-</div>
-</div>
-</div>
-{/* Content Side */}
-<div className="w-full lg:w-1/2 space-y-10 reveal reveal-right">
-<div className="space-y-6">
-<h2 className="text-5xl md:text-7xl font-bold text-white tracking-tighter leading-[0.9]">
-                        Bứt phá giới hạn cùng <span className="text-primary text-glow">PADME</span>
-</h2>
-<p className="text-on-surface-variant text-xl leading-relaxed">
-                        Chúng tôi không chỉ xây dựng phần mềm; chúng tôi kiến tạo các hệ sinh thái thông minh, trao quyền cho doanh nghiệp làm chủ tương lai thông qua sức mạnh của Trí tuệ nhân tạo và Tự động hóa quy mô lớn.
-                    </p>
-</div>
-<div className="glass-card p-8 rounded-2xl border border-outline-variant/20 relative overflow-hidden">
-{/* Decorative glow */}
-<div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 blur-3xl"></div>
-<form className="space-y-6">
-<h4 className="text-xl font-bold text-white flex items-center gap-3">
-<span className="material-symbols-outlined text-primary">rocket_launch</span>
-                            Bắt đầu dự án của bạn
-                        </h4>
-<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-<div className="space-y-1">
-<label className="text-[10px] uppercase font-bold text-on-surface-variant tracking-widest ml-1">Họ và tên</label>
-<input className="w-full bg-surface-container-lowest border-none border-b-2 border-outline-variant/20 focus:border-primary focus:ring-0 text-white placeholder:text-slate-600 px-4 py-3 rounded-lg transition-all" placeholder="Nguyễn Văn A" type="text"/>
-</div>
-<div className="space-y-1">
-<label className="text-[10px] uppercase font-bold text-on-surface-variant tracking-widest ml-1">Email liên hệ</label>
-<input className="w-full bg-surface-container-lowest border-none border-b-2 border-outline-variant/20 focus:border-primary focus:ring-0 text-white placeholder:text-slate-600 px-4 py-3 rounded-lg transition-all" placeholder="name@company.com" type="email"/>
-</div>
-</div>
-<div className="space-y-1">
-<label className="text-[10px] uppercase font-bold text-on-surface-variant tracking-widest ml-1">Thông điệp</label>
-<textarea className="w-full bg-surface-container-lowest border-none border-b-2 border-outline-variant/20 focus:border-primary focus:ring-0 text-white placeholder:text-slate-600 px-4 py-3 rounded-lg transition-all" placeholder="Chia sẻ nhu cầu của bạn..." rows="3"></textarea>
-</div>
-<button className="w-full primary-gradient py-4 rounded-xl font-bold text-on-primary-container hover:shadow-primary/40 hover:shadow-xl transition-all duration-300 flex justify-center items-center gap-3" type="submit">
-                            Gửi yêu cầu tư vấn
-                            <span className="material-symbols-outlined">send</span>
-</button>
-</form>
-</div>
-</div>
-</div>
-</section>
-{/* Tax Information Pre-footer */}
-<section className="bg-surface-container-low border-y border-outline-variant/10 py-8">
-<div className="max-w-7xl mx-auto px-8">
-<div className="flex flex-col md:flex-row items-center justify-center gap-4 text-center text-sm tracking-wide text-on-surface-variant/80">
-<span className="material-symbols-outlined text-primary text-xl" data-icon="corporate_fare">corporate_fare</span>
-<p>Mã số thuế: <span className="text-white font-bold">0109528415</span> — <span className="text-white font-bold uppercase">CÔNG TY TNHH THƯƠNG MẠI PADME VIỆT NAM</span></p>
-</div>
-</div>
-</section>
-</main>
-{/* Footer */}
-<footer className="bg-slate-950 w-full pt-20 pb-10 border-t border-slate-800/50">
-<div className="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-4 gap-12">
-<div className="space-y-6">
-<div className="text-xl font-black text-white uppercase font-headline">PADME VIỆT NAM</div>
-<p className="text-slate-500 font-['Inter'] leading-relaxed text-sm">
-                Đơn vị cung cấp giải pháp chuyển đổi số toàn diện, tối ưu hóa vận hành doanh nghiệp bằng công nghệ AI tiên tiến.
-            </p>
-</div>
-<div className="space-y-4">
-<h5 className="text-white font-bold uppercase tracking-wider text-xs">Về chúng tôi</h5>
-<ul className="space-y-3 font-['Inter'] text-sm text-slate-500">
-<li><a className="hover:text-orange-500 transition-colors" href="#">Chính sách bảo mật</a></li>
-<li><a className="hover:text-orange-500 transition-colors" href="#">Điều khoản sử dụng</a></li>
-<li><a className="hover:text-orange-500 transition-colors" href="#">Hợp tác</a></li>
-<li><a className="hover:text-orange-500 transition-colors" href="#">Tuyển dụng</a></li>
-</ul>
-</div>
-<div className="space-y-4">
-<h5 className="text-white font-bold uppercase tracking-wider text-xs">Liên hệ</h5>
-<ul className="space-y-3 font-['Inter'] text-sm text-slate-500">
-<li className="flex items-center gap-2">
-<span className="material-symbols-outlined text-orange-500 text-sm">mail</span>
-                    contact@padme.vn
-                </li>
-<li className="flex items-center gap-2">
-<span className="material-symbols-outlined text-orange-500 text-sm">call</span>
-                    0345 595 999
-                </li>
-</ul>
-</div>
-<div className="space-y-4">
-<h5 className="text-white font-bold uppercase tracking-wider text-xs">Đăng ký bản tin</h5>
-<div className="flex">
-<input className="bg-slate-900 border-none text-white text-xs px-4 py-2 rounded-l-lg w-full focus:ring-1 focus:ring-orange-500" placeholder="Email của bạn" type="email"/>
-<button className="bg-orange-500 text-white px-4 py-2 rounded-r-lg hover:bg-orange-600 transition-colors">
-<span className="material-symbols-outlined text-sm">send</span>
-</button>
-</div>
-</div>
-</div>
-<div className="max-w-7xl mx-auto px-8 mt-20 pt-8 border-t border-slate-900 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500 text-xs">
-<p>© 2024 CÔNG TY TNHH THƯƠNG MẠI PADME VIỆT NAM. All rights reserved.</p>
-<div className="flex gap-6">
-<a className="hover:text-orange-500 transition-colors" href="#"><span className="material-symbols-outlined">public</span></a>
-<a className="hover:text-orange-500 transition-colors" href="#"><span className="material-symbols-outlined">alternate_email</span></a>
-</div>
-</div>
-</footer>
+      <Header />
+      <main>
+        <Hero />
+        <About />
+        <Services />
+        <Products />
+        <Contact />
+        <TaxInfo />
+      </main>
+      <Footer />
     </>
   );
 }
