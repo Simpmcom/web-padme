@@ -1,5 +1,4 @@
-- Tên chuyên gia: Nguyễn Văn A
-- Định vị thương hiệu: Chuyên gia AI & Tự động hóa
-- Giải pháp cung cấp: Triển khai MCP server, Xây dựng hệ thống N8N AI, Đào tạo xây dựng thương hiệu cá nhân bằng AI.
-- Khóa học nổi bật: Khóa K89 - Thực chiến Agentic AI & Tự động hóa (Thời gian học: 12 buổi, hình thức Online Zoom).
-- Liên hệ tư vấn: Email a@example.com hoặc Zalo 0123456789.
+Tên Thương hiệu: Công ty TNHH Thương Mại PADME
+Định vị thương hiệu: Chuyên gia Marketing số & Tự động hóa
+Giải pháp cung cấp: Kiến tạo tương lai số bằng sức mạnh của AI và hệ thống Marketing tự động hóa. Chúng tôi đồng hành cùng doanh nghiệp bứt phá mọi giới hạn.
+Liên hệ tư vấn: Hi@padme.com hoặc Zalo: 0345.595.999
