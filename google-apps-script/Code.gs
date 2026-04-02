@@ -12,7 +12,7 @@
 
 // ⚠️ CẤU HÌNH — THAY BẰNG THÔNG TIN THẬT CỦA BẠN
 var SPREADSHEET_ID = '1n81tWwhWFi0rUo-CDMIQrp0HamgtRbrQW8SyJ7ZImsA';
-var SALES_EMAIL = 'sales@padme.com'; // ⚠️ THAY EMAIL SALES TEAM TẠI ĐÂY
+var SALES_EMAIL = 'kuonzgjk@gmail.com'; // Email nhận cảnh báo khách HOT
 
 function doPost(e) {
   try {
