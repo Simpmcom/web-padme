@@ -72,6 +72,8 @@ async function sendLeadToGoogleSheets(leadData, chatHistoryText) {
         name: leadData.name || '',
         phone: leadData.phone || '',
         email: leadData.email || '',
+        interest: leadData.interest || '',
+        intent_level: leadData.intent_level || '',
         source: window.location.href,
         sessionId: AI_CHAT_SESSION_ID,
         chatHistory: chatHistoryText,
@@ -135,10 +137,18 @@ Quy tắc giao tiếp bắt buộc:
 3. Nếu người dùng hỏi điều gì ngoài phạm vi dữ liệu trên, hãy tế nhị từ chối và hướng dẫn họ gửi email hoặc nhắn tin Zalo trực tiếp cho chuyên gia.
 4. Không được phép bịa đặt thông tin ngoài cơ sở dữ liệu đã cấp.
 
-Quy tắc đặc biệt (THU THẬP THÔNG TIN KHÁCH HÀNG):
+Quy tắc đặc biệt (THU THẬP & PHÂN LOẠI KHÁCH HÀNG):
 Trong quá trình trò chuyện, nếu bạn phát hiện người dùng cung cấp Tên, Số điện thoại hoặc Email, bạn HÃY VỪA trả lời họ bình thường, VỪA chèn thêm một đoạn mã JSON vào cuối cùng của câu trả lời theo đúng định dạng sau:
-||LEAD_DATA: {"name": "...", "phone": "...", "email": "..."}||
-Nếu thông tin nào chưa có, hãy để null.
+||LEAD_DATA: {"name": "...", "phone": "...", "email": "...", "interest": "...", "intent_level": "..."}||
+
+Giải thích các trường:
+- name, phone, email: Thông tin liên hệ khách cung cấp. Nếu chưa có, để null.
+- interest: Bạn TỰ PHÂN TÍCH từ nội dung cuộc trò chuyện, khách quan tâm sản phẩm/dịch vụ gì. Viết ngắn gọn bằng tiếng Việt. Nếu chưa rõ, để null.
+- intent_level: Bạn TỰ ĐÁNH GIÁ mức độ sẵn sàng mua hàng của khách dựa trên ngữ cảnh hội thoại. Chỉ dùng 1 trong 3 giá trị:
+  + "hot" = Khách muốn mua ngay, yêu cầu báo giá, đặt hàng, hẹn gặp, hoặc thể hiện sự khẩn cấp.
+  + "warm" = Khách quan tâm, hỏi chi tiết về sản phẩm/dịch vụ, so sánh giá, nhưng chưa quyết định.
+  + "cold" = Khách chỉ tìm hiểu chung, hỏi thăm, chưa có nhu cầu rõ ràng.
+  Nếu chưa đủ thông tin để đánh giá, để "cold".
 TUYỆT ĐỐI KHÔNG giải thích hay đề cập đến đoạn mã này cho người dùng.`;
         setSystemPrompt(prompt);
       } catch (error) {
